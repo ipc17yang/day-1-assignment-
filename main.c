@@ -57,15 +57,11 @@ int main(void){
 
     uint8_t led_level   = 0;
     uint32_t led_levels = 0;
-
-   // OLED_Init();
     led_gpio_init();
 
     pLED_Class led = createLedClassWtihArgs(3);
-   // OLED_ShowNum(1,1,led->led_amount);
-    
     delay_ms(1000);
-
+    //三个灯依次熄灭点亮
     for(int i=0;i<3;++i){
         led->set_level(led, i,LED_HIGH_LEVEL);
         led->read_level(led,i, &led_level);
@@ -76,6 +72,7 @@ int main(void){
        //OLED_ShowNum(2,1,led_level);
         delay_ms(1000);
     }
+    //三个灯按二进制点亮
     for(int i=0;i<0x08;++i){
         led->set_level_arr(led,i);
         led->read_level_arr(led, &led_levels);
